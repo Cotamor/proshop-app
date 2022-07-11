@@ -1,8 +1,28 @@
+import { Container } from 'react-bootstrap'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Footer from './components/Footer'
+import Header from './components/Header'
+import CartScreen from './screens/CartScreen'
+import HomeScreen from './screens/HomeScreen'
+import LoginScreen from './screens/LoginScreen'
+import ProductScreen from './screens/ProductScreen'
+
 const App = () => {
   return (
-    <>
-      <h1>Welcome To ProShop</h1>
-    </>
+    <Router>
+      <Header />
+      <main className='py-3'>
+        <Container>
+          <Routes>
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/cart' element={<CartScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/product/:id' element={<ProductScreen />} />
+          </Routes>
+        </Container>
+      </main>
+      <Footer />
+    </Router>
   )
 }
 export default App
