@@ -1,14 +1,25 @@
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
+// import products from '../products'
+
 import { useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({})
   const params = useParams()
   const { id } = params
-  const product = products.find((product) => product._id === id)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${id}`)
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [])
+  // const product = products.find((product) => product._id === id)
   return (
     <>
       <BackButton url='/' />
