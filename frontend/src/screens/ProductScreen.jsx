@@ -10,7 +10,7 @@ import Message from '../components/Message'
 import { productDetails } from '../actions/productActions'
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
   const { product, error, loading } = useSelector(
     (state) => state.productDetails
   )
