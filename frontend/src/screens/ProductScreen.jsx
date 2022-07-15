@@ -23,9 +23,9 @@ const ProductScreen = () => {
     dispatch(productDetails(id))
   }, [dispatch, id])
 
-  const addItemsToCart = () => {
+  const addToCartHandler = () => {
     console.log('click')
-    navigate(`/product/${id}?qty=${qty}`)
+    navigate(`/cart/${id}?qty=${qty}`)
   }
   return (
     <>
@@ -102,7 +102,7 @@ const ProductScreen = () => {
                     <Button
                       type='button'
                       disabled={product.countInStock === 0}
-                      onClick={addItemsToCart}
+                      onClick={addToCartHandler}
                     >
                       Add To Cark
                     </Button>
