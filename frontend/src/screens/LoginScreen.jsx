@@ -21,9 +21,9 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      navigate('/' + redirect)
     }
-  }, [navigate, userInfo])
+  }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault()

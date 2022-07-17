@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 const ProfileScreen = () => {
   const [name, setName] = useState('')
@@ -14,6 +14,7 @@ const ProfileScreen = () => {
   const [message, setMessage] = useState(null)
   const { user, loading, error } = useSelector((state) => state.userDetails)
   const { userInfo } = useSelector((state) => state.userLogin)
+  const { success } = useSelector((state) => state.userUpdateProfile)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ const ProfileScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     console.log('update')
+    dispatch(updateUserProfile({ id: user._id, name, email, password }))
   }
 
   return (
@@ -41,7 +43,7 @@ const ProfileScreen = () => {
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
-
+        {success && <Message variant='info'>Profile Updated</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -87,10 +89,11 @@ const ProfileScreen = () => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </Form.Group>
-
-            <Button type='submit' variant='primary'>
-              Update
-            </Button>
+            <div className='d-grid'>
+              <Button type='submit' variant='primary'>
+                Update
+              </Button>
+            </div>
           </Form>
         )}
       </Col>
