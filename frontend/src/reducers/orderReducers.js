@@ -21,7 +21,7 @@ export const orderCreateReducer = (state = {}, action) => {
 }
 // you could add loading: true in initial state
 export const orderDetailsReducer = (
-  state = { loading: true, orderItems: [], shippingAddress: {} },
+  state = { loading: true, order: {} },
   action
 ) => {
   switch (action.type) {
