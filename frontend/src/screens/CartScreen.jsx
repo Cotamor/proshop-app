@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import Loader from '../components/Loader'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 const CartScreen = () => {
@@ -21,7 +20,7 @@ const CartScreen = () => {
       dispatch(addToCart(productId, qty))
       navigate('/cart')
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, navigate, productId, qty])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
