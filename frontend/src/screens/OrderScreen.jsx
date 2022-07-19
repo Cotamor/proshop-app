@@ -14,16 +14,16 @@ const OrderScreen = () => {
   const params = useParams()
   const { id } = params
 
-  if (!loading) {
-    const addDecimals = (num) => {
-      return (Math.round(num * 100) / 100).toFixed(2)
-    }
+  // if (!loading) {
+  //   const addDecimals = (num) => {
+  //     return (Math.round(num * 100) / 100).toFixed(2)
+  //   }
 
-    // Calculate prices
-    order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    )
-  }
+  //   // Calculate prices
+  //   order.itemsPrice = addDecimals(
+  //     order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  //   )
+  // }
 
   useEffect(() => {
     if (!order || order._id !== id) {
