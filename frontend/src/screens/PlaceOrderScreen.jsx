@@ -9,8 +9,6 @@ import { createOrder } from '../actions/orderActions'
 
 const PlaceOrderScreen = () => {
   const cart = useSelector((state) => state.cart)
-  const { shippingAddress } = cart
-  const { address, city, postalCode, country } = shippingAddress
 
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
@@ -46,7 +44,7 @@ const PlaceOrderScreen = () => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
-        shippingAddress,
+        shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
@@ -65,7 +63,7 @@ const PlaceOrderScreen = () => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {`${address}, ${city} ${postalCode}, ${country}`}
+                {`${cart.shippingAddress.address}, ${cart.shippingAddress.city} ${cart.shippingAddress.postalCode}, ${cart.shippingAddress.country}`}
               </p>
             </ListGroup.Item>
 
