@@ -24,7 +24,6 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
-  USER_UPDATE_RESET,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 
@@ -64,7 +63,6 @@ export const logout = () => async (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET })
   dispatch({ type: ORDER_LIST_MY_RESET })
   dispatch({ type: USER_LIST_REST })
-  dispatch({ type: USER_UPDATE_RESET })
 }
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -200,7 +198,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
   }
 }
 
-export const updateUser = (user, id) => async (dispatch, getState) => {
+export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST })
     const {
@@ -212,9 +210,10 @@ export const updateUser = (user, id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const { data } = await axios.put(`/api/users/${id}`, user, config)
+    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
 
-    dispatch({ type: USER_UPDATE_SUCCESS, payload: data })
+    dispatch({ type: USER_UPDATE_SUCCESS })
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
