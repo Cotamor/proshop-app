@@ -5,12 +5,16 @@ import { LinkContainer } from 'react-router-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom'
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 const ProductListScreen = () => {
   const { products, loading, error } = useSelector((state) => state.productList)
   const { userInfo } = useSelector((state) => state.userLogin)
-  // const { success: successDelete } = useSelector((state) => state.userDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = useSelector((state) => state.productDelete)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -20,11 +24,12 @@ const ProductListScreen = () => {
     } else {
       navigate('/login')
     }
-  }, [dispatch, navigate, userInfo])
+  }, [dispatch, navigate, userInfo, successDelete])
 
   const deleteHandler = (productId) => {
     if (window.confirm('Are you sure to delete product?')) {
       // Delete Product
+      dispatch(deleteProduct(productId))
     }
   }
   const createProductHandler = () => {
@@ -43,6 +48,8 @@ const ProductListScreen = () => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -64,7 +71,7 @@ const ProductListScreen = () => {
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
-                <td >${product.price}</td>
+                <td>${product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
 
