@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { productDetails } from '../actions/productActions'
+import { listProductDetails } from '../actions/productActions'
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1)
@@ -19,7 +19,7 @@ const ProductScreen = () => {
   const { id } = params
 
   useEffect(() => {
-    dispatch(productDetails(id))
+    dispatch(listProductDetails(id))
   }, [dispatch, id])
 
   const addToCartHandler = () => {

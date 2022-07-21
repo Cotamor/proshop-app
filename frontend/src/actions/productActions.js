@@ -32,7 +32,7 @@ export const listProducts = () => async (dispatch) => {
     })
   }
 }
-export const productDetails = (productId) => async (dispatch) => {
+export const listProductDetails = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
