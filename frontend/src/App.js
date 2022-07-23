@@ -1,21 +1,22 @@
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import CartScreen from './screens/CartScreen'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
-import ProductScreen from './screens/ProductScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import ProfileScreen from './screens/ProfileScreen'
-import ShippingScreen from './screens/ShippingScreen'
+import OrderListScreen from './screens/OrderListScreen'
+import OrderScreen from './screens/OrderScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
-import OrderScreen from './screens/OrderScreen'
-import UserListScreen from './screens/UserListScreen'
-import UserEditScreen from './screens/UserEditScreen'
-import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import ProductScreen from './screens/ProductScreen'
+import ProfileScreen from './screens/ProfileScreen'
+import RegisterScreen from './screens/RegisterScreen'
+import ShippingScreen from './screens/ShippingScreen'
+import UserEditScreen from './screens/UserEditScreen'
+import UserListScreen from './screens/UserListScreen'
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/productlist' element={<ProductListScreen />} />
+            <Route path='/admin/orderlist' element={<OrderListScreen/>} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
             <Route
               path='/admin/product/:id/edit'
