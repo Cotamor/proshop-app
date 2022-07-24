@@ -1,13 +1,13 @@
 import asyncHandler from 'express-async-handler'
 import Product from '../models/productModel.js'
+import Order from '../models/orderModel.js'
 
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find()
-  // res.status(404)
-  // throw new Error('Not Authorized')
+  
   res.json(products)
 })
 
@@ -93,7 +93,25 @@ const createProductReview = asyncHandler(async (req, res) => {
 
   const product = await Product.findById(req.params.id)
 
+  // Bring in user orders to check if they ordered the product
+  const orders = await Order.find({ user: req.user._id })
+  // Array of product ids that the user orderd
+  const ordersItems = [].concat.apply(
+    [],
+    orders.map((order) =>
+      order.orderItems.map((item) => item.product.toString())
+    )
+  )
+
   if (product) {
+    // Check if the id of the product matches any of the users ordered products
+    const hasBought = ordersItems.includes(product._id.toString())
+
+    if (!hasBought) {
+      res.status(400)
+      throw new Error('You can only review products you bought')
+    }
+
     const alreadyReviewed = product.reviews.find(
       (review) => review.user.toString() === req.user._id.toString()
     )
