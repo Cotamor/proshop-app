@@ -12,6 +12,7 @@ import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions'
+import { addToCart } from '../actions/cartActions'
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1)
@@ -43,9 +44,11 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview])
 
+  // Fix solution from Q&A
   const addToCartHandler = () => {
-    console.log('click')
-    navigate(`/cart/${id}?qty=${qty}`)
+    // navigate(`/cart/${id}?qty=${qty}`)
+    dispatch(addToCart(product._id, qty))
+    navigate('/cart')
   }
 
   const submitHandler = (e) => {

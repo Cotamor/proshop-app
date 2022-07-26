@@ -1,5 +1,9 @@
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Footer from './components/Footer'
 import Header from './components/Header'
 import CartScreen from './screens/CartScreen'
@@ -38,7 +42,10 @@ const App = () => {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/productlist' element={<ProductListScreen />} />
-            <Route path='/admin/productlist/:pageNumber' element={<ProductListScreen/>} />
+            <Route
+              path='/admin/productlist/:pageNumber'
+              element={<ProductListScreen />}
+            />
             <Route path='/admin/orderlist' element={<OrderListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
             <Route
@@ -55,6 +62,7 @@ const App = () => {
         </Container>
       </main>
       <Footer />
+      <ToastContainer />
     </Router>
   )
 }

@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
@@ -8,19 +7,19 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 const CartScreen = () => {
   const { cartItems } = useSelector((state) => state.cart)
 
-  const params = useParams()
-  const productId = params.id
-  const location = useLocation()
-  const qty = Number(new URLSearchParams(location.search).get('qty'))
+  // const params = useParams()
+  // const productId = params.id
+  // const location = useLocation()
+  // const qty = Number(new URLSearchParams(location.search).get('qty'))
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty))
-      navigate('/cart')
-    }
-  }, [dispatch, navigate, productId, qty])
+  // useEffect(() => {
+  //   if (productId) {
+  //     dispatch(addToCart(productId, qty))
+  //     navigate('/cart')
+  //   }
+  // }, [dispatch, navigate, productId, qty])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
